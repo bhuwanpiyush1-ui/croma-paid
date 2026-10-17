@@ -693,7 +693,7 @@ async function cRun(){
 function cCopyAllWithBal(){
   if(!cResults.length){ toast('No cards checked yet','var(--red)'); return; }
   const text = cResults.map(r => {
-    const balText = r.invalid ? 'Invalid' : (r.balance !== undefined ? `₹${r.balance}` : 'ERR');
+    const balText = r.invalid ? 'Invalid' : (r.balance !== undefined ? `${r.balance}` : 'ERR');
     return `${r.card}\t${r.pin || ''}\t${balText}`;
   }).join('\n');
   doCopy(text, `📋 Copied All ${cResults.length} Cards with Balance & PIN`);
@@ -703,8 +703,8 @@ function cCopyAllWithBal(){
 function cCopyOnlyBalanceCards(){
   const valid = cResults.filter(r => r.balance && r.balance > 0);
   if(!valid.length){ toast('No cards with positive balance','var(--red)'); return; }
-  const text = valid.map(r => `${r.card}\t${r.pin || ''}`).join('\n');
-  doCopy(text, `💰 Copied ${valid.length} Balance Cards + PIN`);
+  const text = valid.map(r => `${r.card}\t${r.pin || ''}\t${r.balance}`).join('\n');
+  doCopy(text, `💰 Copied ${valid.length} Balance Cards + PIN + Balance`);
 }
 
 // Option 3: Copy All (Card + PIN only)
